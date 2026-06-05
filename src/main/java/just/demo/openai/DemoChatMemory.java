@@ -1,5 +1,8 @@
 package just.demo.openai;
 
+import static java.util.UUID.randomUUID;
+
+import static org.springframework.ai.chat.memory.ChatMemory.CONVERSATION_ID;
 import static org.springframework.boot.WebApplicationType.NONE;
 
 import java.util.Scanner;
@@ -28,6 +31,7 @@ public class DemoChatMemory {
           .defaultSystem("Respond to user")
           .defaultAdvisors(MessageChatMemoryAdvisor.builder(MessageWindowChatMemory.builder().build()).build())
           .build();
+      String conversationId = randomUUID().toString();
       Scanner scanner = new Scanner(System.in);
       while (true) {
         System.out.print("You: ");
@@ -35,7 +39,12 @@ public class DemoChatMemory {
         if (message.isBlank()) {
           break;
         }
-        String answer = chatClient.prompt().user(message).call().content();
+
+        String answer = chatClient.prompt()
+            .user(message)
+            .advisors(advisor -> advisor.param(CONVERSATION_ID, conversationId))
+            .call()
+            .content();
         System.out.println("Assistant: " + answer);
       }
     };
