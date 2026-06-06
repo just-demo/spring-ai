@@ -51,9 +51,3 @@ dependencyManagement {
 tasks.named('test') {
 	useJUnitPlatform()
 }
-
-tasks.register('runExample', JavaExec) {
-	classpath = sourceSets.main.runtimeClasspath
-	mainClass = project.findProperty('mainClass')
-	standardInput = System.in
-}
