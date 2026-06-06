@@ -31,7 +31,12 @@ public class DemoVectorSearch {
       "sport", List.of("Muhammad Ali was an American professional boxer and social activist."));
 
   public static void main(String[] args) {
-    new SpringApplicationBuilder(DemoVectorSearch.class).web(NONE).run(args).close();
+    new SpringApplicationBuilder(DemoVectorSearch.class)
+        .web(NONE)
+        // this model produces much better results than the default one
+        .properties("spring.ai.openai.embedding.options.model=text-embedding-3-small")
+        .run(args)
+        .close();
   }
 
   @Bean

@@ -16,7 +16,12 @@ import org.springframework.context.annotation.Configuration;
 public class DemoVectorSimilarity {
 
   public static void main(String[] args) {
-    new SpringApplicationBuilder(DemoVectorSimilarity.class).web(NONE).run(args).close();
+    new SpringApplicationBuilder(DemoVectorSimilarity.class)
+        .web(NONE)
+        // this model produces much better results than the default one
+        .properties("spring.ai.openai.embedding.options.model=text-embedding-3-small")
+        .run(args)
+        .close();
   }
 
   @Bean
