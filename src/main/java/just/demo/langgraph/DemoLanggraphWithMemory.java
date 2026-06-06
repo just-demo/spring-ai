@@ -47,7 +47,9 @@ public class DemoLanggraphWithMemory {
               .addEdge(START, "demo")
               .addEdge("demo", END)
               .compile(CompileConfig.builder().checkpointSaver(new MemorySaver()).build());
+
       RunnableConfig config = RunnableConfig.builder().threadId(randomUUID().toString()).build();
+
       testQuestion(graph, config, "My name is William Shakespeare");
       testQuestion(graph, config, "What is my name?");
     };
@@ -55,12 +57,9 @@ public class DemoLanggraphWithMemory {
 
   private static void testQuestion(CompiledGraph<MessagesState<Message>> graph, RunnableConfig config, String
       question) {
-    String answer = graph.invoke(Map.of("messages", new UserMessage(question)), config)
-        .orElseThrow()
-        .lastMessage()
-        .orElseThrow()
-        .getText();
     System.out.println(question);
+    String answer = graph.invoke(Map.of("messages", new UserMessage(question)), config)
+        .orElseThrow().lastMessage().orElseThrow().getText();
     System.out.println(answer);
   }
 }

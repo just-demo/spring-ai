@@ -45,9 +45,11 @@ public class DemoLanggraphSimple {
           .addEdge("demo", END)
           .compile();
 
-      MessagesState<Message> result = graph.invoke(Map.of("messages", new UserMessage("Who are you?"))).orElseThrow();
-      AssistantMessage answer = (AssistantMessage) result.lastMessage().orElseThrow();
-      System.out.println(answer.getText());
+      String question = "Who are you?";
+      System.out.println(question);
+      String answer = graph.invoke(Map.of("messages", new UserMessage(question)))
+          .orElseThrow().lastMessage().orElseThrow().getText();
+      System.out.println(answer);
     };
   }
 }

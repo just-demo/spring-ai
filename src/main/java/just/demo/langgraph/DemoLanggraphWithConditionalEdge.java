@@ -35,10 +35,10 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @EnableAutoConfiguration
-public class DemoLanggraphConditionalEdge {
+public class DemoLanggraphWithConditionalEdge {
 
   public static void main(String[] args) {
-    new SpringApplicationBuilder(DemoLanggraphConditionalEdge.class).web(NONE).run(args).close();
+    new SpringApplicationBuilder(DemoLanggraphWithConditionalEdge.class).web(NONE).run(args).close();
   }
 
   @Bean
@@ -75,9 +75,11 @@ public class DemoLanggraphConditionalEdge {
               Map.of("answerer", "answerer", "END", END))
           .compile();
 
-      MessagesState<Message> result = graph.invoke(Map.of("messages", new UserMessage("Who are you?"))).orElseThrow();
-      AssistantMessage answer = (AssistantMessage) result.lastMessage().orElseThrow();
-      System.out.println(answer.getText());
+      String question = "Who are you?";
+      System.out.println(question);
+      String answer = graph.invoke(Map.of("messages", new UserMessage(question)))
+          .orElseThrow().lastMessage().orElseThrow().getText();
+      System.out.println(answer);
     };
   }
 
