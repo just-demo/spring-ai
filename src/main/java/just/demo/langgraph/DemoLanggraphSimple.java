@@ -1,6 +1,5 @@
 package just.demo.langgraph;
 
-import static org.bsc.langgraph4j.GraphRepresentation.Type.MERMAID;
 import static org.bsc.langgraph4j.StateGraph.END;
 import static org.bsc.langgraph4j.StateGraph.START;
 import static org.bsc.langgraph4j.action.AsyncNodeAction.node_async;
@@ -45,7 +44,7 @@ public class DemoLanggraphSimple {
           .addEdge(START, "demo")
           .addEdge("demo", END)
           .compile();
-      System.out.println(graph.getGraph(MERMAID).content());
+
       Scanner scanner = new Scanner(System.in);
       while (true) {
         System.out.print("You: ");
