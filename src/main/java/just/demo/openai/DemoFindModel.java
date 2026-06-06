@@ -29,7 +29,8 @@ public class DemoFindModel {
           .headers(headers -> headers.setBearerAuth(props.getApiKey()))
           .retrieve()
           .body(Models.class)
-          .data().stream()
+          .data()
+          .stream()
           .map(Model::id)
           .filter(id -> id.contains("nano"))
           .toList();
