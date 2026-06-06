@@ -7,7 +7,6 @@ import static org.springframework.boot.WebApplicationType.NONE;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 
 import org.bsc.langgraph4j.CompiledGraph;
 import org.bsc.langgraph4j.prebuilt.MessagesState;
@@ -38,6 +37,7 @@ public class DemoLanggraphSimple {
       CompiledGraph<MessagesState<Message>> graph = new MessagesStateGraph<Message>(
           new SpringAIStateSerializer<>(MessagesState::new))
           .addNode("demo", node_async(state -> {
+            // Don't really need to communicate with LLM here, e.g. could return a dummy result
             AssistantMessage response = chatModel.call(new Prompt(state.messages())).getResult().getOutput();
             return Map.of("messages", List.of(new AssistantMessage(response.getText())));
           }))
@@ -45,17 +45,9 @@ public class DemoLanggraphSimple {
           .addEdge("demo", END)
           .compile();
 
-      Scanner scanner = new Scanner(System.in);
-      while (true) {
-        System.out.print("You: ");
-        String userInput = scanner.nextLine();
-        if (userInput.isBlank()) {
-          break;
-        }
-        MessagesState<Message> result = graph.invoke(Map.of("messages", new UserMessage(userInput))).orElseThrow();
-        AssistantMessage answer = (AssistantMessage) result.lastMessage().orElseThrow();
-        System.out.println("Assistant: " + answer.getText());
-      }
+      MessagesState<Message> result = graph.invoke(Map.of("messages", new UserMessage("Who are you?"))).orElseThrow();
+      AssistantMessage answer = (AssistantMessage) result.lastMessage().orElseThrow();
+      System.out.println(answer.getText());
     };
   }
 }
