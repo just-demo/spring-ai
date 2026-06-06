@@ -21,10 +21,10 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @EnableAutoConfiguration
-public class DemoEmbeddings {
+public class DemoVectorVisualize {
 
   public static void main(String[] args) {
-    new SpringApplicationBuilder(DemoEmbeddings.class).web(NONE).run(args).close();
+    new SpringApplicationBuilder(DemoVectorVisualize.class).web(NONE).run(args).close();
   }
 
   @Bean
