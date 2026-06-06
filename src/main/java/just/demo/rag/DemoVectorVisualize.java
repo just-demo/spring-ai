@@ -23,7 +23,13 @@ import org.springframework.context.annotation.Configuration;
 @EnableAutoConfiguration
 public class DemoVectorVisualize {
 
+  private static final List<String> DOCUMENTS = List.of(
+      "https://en.wikipedia.org/wiki/William_Shakespeare",
+      "https://en.wikipedia.org/wiki/Leonardo_da_Vinci");
+
   public static void main(String[] args) {
+    // Wikipedia rejects the default "Java/xx" User-Agent with 403, JsoupDocumentReader loads URLs via HttpURLConnection
+    System.setProperty("http.agent", "Mozilla/5.0 (SpringAiDemo)");
     new SpringApplicationBuilder(DemoVectorVisualize.class).web(NONE).run(args).close();
   }
 
@@ -45,14 +51,7 @@ public class DemoVectorVisualize {
 
   private static List<Document> generateDocuments() {
     List<Document> documents = new ArrayList<>();
-
-    List<String> urls = List.of(
-        "https://en.wikipedia.org/wiki/William_Shakespeare",
-        "https://en.wikipedia.org/wiki/Leonardo_da_Vinci");
-
-    // Wikipedia rejects the default "Java/xx" User-Agent with 403, JsoupDocumentReader loads URLs via HttpURLConnection
-    System.setProperty("http.agent", "Mozilla/5.0 (SpringAiDemo)");
-    for (String url : urls) {
+    for (String url : DOCUMENTS) {
       new JsoupDocumentReader(url).get().stream()
           .map(document -> Document.builder()
               // Just to prevent unexpected openai costs if the page size becomes too big
