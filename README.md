@@ -1,7 +1,21 @@
 # spring-ai
 
-## Local Deployment
+## Running examples
 
 1. Create `.env` file in the project root directory with `OPENAI_API_KEY=sk-...` variable
-2. Run `just.demo.DemoApplication` without any arguments or env variables
-3. Go to http://localhost:8080/swagger-ui/index.html
+2. Run `just.demo.openai.DemoPrompt.main` or any other example
+
+## Ollama
+
+http://localhost:11434/
+
+```
+ollama serve
+ollama stop
+
+ollama ls
+ollama run llama3.2
+
+ollama pull llama3.2
+ollama rm llama3.2
+```

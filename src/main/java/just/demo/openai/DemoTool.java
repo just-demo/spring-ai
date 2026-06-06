@@ -2,8 +2,6 @@ package just.demo.openai;
 
 import static org.springframework.boot.WebApplicationType.NONE;
 
-import java.util.Scanner;
-
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.ai.tool.annotation.ToolParam;
@@ -56,20 +54,13 @@ public class DemoTool {
           .defaultSystem("Your task is to answer questions.")
           .defaultTools(new UserRecordingTools())
           .build();
-      Scanner scanner = new Scanner(System.in);
-      while (true) {
-        System.out.print("You: ");
-        String message = scanner.nextLine();
-        if (message.isBlank()) {
-          break;
-        }
 
-        String answer = chatClient.prompt()
-            .user(message)
-            .call()
-            .content();
-        System.out.println("Assistant: " + answer);
-      }
+      String answer = chatClient.prompt()
+          .user("My name is William Shakespeare and my email is test@test.com, what's up?")
+          .call()
+          .content();
+
+      System.out.println(answer);
     };
   }
 }
