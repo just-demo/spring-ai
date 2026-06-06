@@ -14,10 +14,10 @@ import org.springframework.web.client.RestClient;
 
 @Configuration
 @EnableAutoConfiguration
-public class DemoFindModel {
+public class FindModel {
 
   public static void main(String[] args) {
-    new SpringApplicationBuilder(DemoFindModel.class).web(NONE).run(args).close();
+    new SpringApplicationBuilder(FindModel.class).web(NONE).run(args).close();
   }
 
   @Bean
