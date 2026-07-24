@@ -6,11 +6,13 @@ import com.openai.models.embeddings.CreateEmbeddingResponse;
 import com.openai.models.embeddings.EmbeddingCreateParams;
 
 import java.io.IOException;
-import java.nio.file.Files;
+import java.io.Reader;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Properties;
 
 import static com.openai.models.embeddings.EmbeddingModel.TEXT_EMBEDDING_3_SMALL;
+import static java.nio.file.Files.newBufferedReader;
 
 public class DemoVectorEmbeddingNative {
 
@@ -35,16 +37,12 @@ public class DemoVectorEmbeddingNative {
     }
 
     private static String loadApiKey() throws IOException {
-        String fromEnv = System.getenv("OPENAI_API_KEY");
-        if (fromEnv != null && !fromEnv.isBlank()) {
-            return fromEnv;
+        Properties props = new Properties();
+        try (Reader reader = newBufferedReader(Path.of(".env"))) {
+            props.load(reader);
         }
-        for (String line : Files.readAllLines(Path.of(".env"))) {
-            if (line.startsWith("OPENAI_API_KEY=")) {
-                return line.substring("OPENAI_API_KEY=".length()).trim();
-            }
-        }
-        throw new IllegalStateException("OPENAI_API_KEY not found in environment or .env file");
+
+        return props.getProperty("OPENAI_API_KEY");
     }
 
 }
