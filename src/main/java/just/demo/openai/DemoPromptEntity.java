@@ -2,6 +2,8 @@ package just.demo.openai;
 
 import static org.springframework.boot.WebApplicationType.NONE;
 
+import com.fasterxml.jackson.annotation.JsonPropertyDescription;
+
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.ResponseEntity;
 import org.springframework.ai.chat.metadata.ChatResponseMetadata;
@@ -36,7 +38,10 @@ public class DemoPromptEntity {
     };
   }
 
-  record DemoEntity(String name, String version, String description) {
-
+  // Description annotations are not necessary, putting them just for visibility
+  record DemoEntity(
+      @JsonPropertyDescription("Name of the assistant or model") String name,
+      @JsonPropertyDescription("Version of the assistant or model") String version,
+      @JsonPropertyDescription("Short description of what the assistant or model is") String description) {
   }
 }
