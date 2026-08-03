@@ -11,10 +11,8 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.file.Path;
 
-import org.springframework.ai.tool.ToolCallbackProvider;
-import org.springframework.ai.tool.annotation.Tool;
-import org.springframework.ai.tool.annotation.ToolParam;
-import org.springframework.ai.tool.method.MethodToolCallbackProvider;
+import org.springframework.ai.mcp.annotation.McpTool;
+import org.springframework.ai.mcp.annotation.McpToolParam;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
@@ -44,12 +42,12 @@ public class DemoMcpCustomServer {
 
     private final Path sandboxDir;
 
-    @Tool(
+    @McpTool(
         name = "write_file",
         description = "Write the given content to a file. If the file already exists, the content will be appended.")
     String writeFile(
-        @ToolParam(description = "file name to write to") String file,
-        @ToolParam(description = "file content to write") String content) {
+        @McpToolParam(description = "file name to write to") String file,
+        @McpToolParam(description = "file content to write") String content) {
       try {
         Path filePath = sandboxDir.resolve(file);
         createDirectories(filePath.getParent());
@@ -62,10 +60,8 @@ public class DemoMcpCustomServer {
   }
 
   @Bean
-  ToolCallbackProvider fileTools() {
+  FileTools fileTools() {
     Path sandboxDir = Path.of("data").resolve("sandbox").toAbsolutePath();
-    return MethodToolCallbackProvider.builder()
-        .toolObjects(new FileTools(sandboxDir))
-        .build();
+    return new FileTools(sandboxDir);
   }
 }
