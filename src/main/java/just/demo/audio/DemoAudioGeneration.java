@@ -1,4 +1,4 @@
-package just.demo.openai;
+package just.demo.audio;
 
 import static java.lang.System.currentTimeMillis;
 

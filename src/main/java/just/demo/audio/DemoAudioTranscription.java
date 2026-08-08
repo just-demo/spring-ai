@@ -1,4 +1,4 @@
-package just.demo.openai;
+package just.demo.audio;
 
 import static com.openai.models.audio.AudioResponseFormat.TEXT;
 

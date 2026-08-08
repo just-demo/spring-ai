@@ -1,4 +1,4 @@
-package just.demo.openai;
+package just.demo.image;
 
 import static org.springframework.util.MimeTypeUtils.IMAGE_JPEG;
 

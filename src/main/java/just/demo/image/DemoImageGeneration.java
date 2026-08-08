@@ -1,4 +1,4 @@
-package just.demo.openai;
+package just.demo.image;
 
 import static java.lang.System.currentTimeMillis;
 
