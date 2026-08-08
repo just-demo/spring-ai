@@ -4,8 +4,8 @@ import static java.lang.Math.sqrt;
 
 import org.springframework.ai.embedding.EmbeddingModel;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -14,11 +14,7 @@ import org.springframework.context.annotation.Configuration;
 public class DemoVectorSimilarity {
 
   public static void main(String[] args) {
-    new SpringApplicationBuilder(DemoVectorSimilarity.class)
-        // this model produces much better results than the default one
-        .properties("spring.ai.openai.embedding.options.model=text-embedding-3-small")
-        .run(args)
-        .close();
+    SpringApplication.run(DemoVectorSimilarity.class, args);
   }
 
   @Bean

@@ -9,8 +9,8 @@ import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.SimpleVectorStore;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,11 +19,7 @@ import org.springframework.context.annotation.Configuration;
 public class DemoVectorSearch {
 
   public static void main(String[] args) {
-    new SpringApplicationBuilder(DemoVectorSearch.class)
-        // this model produces much better results than the default one
-        .properties("spring.ai.openai.embedding.options.model=text-embedding-3-small")
-        .run(args)
-        .close();
+    SpringApplication.run(DemoVectorSearch.class, args);
   }
 
   private static final Map<String, List<String>> DOCUMENTS = Map.of(
