@@ -1,7 +1,5 @@
 package just.demo.rag;
 
-import static org.springframework.boot.WebApplicationType.NONE;
-
 import java.util.List;
 import java.util.Map;
 
@@ -20,24 +18,23 @@ import org.springframework.context.annotation.Configuration;
 @EnableAutoConfiguration
 public class DemoVectorSearch {
 
-  private static final Map<String, List<String>> DOCUMENTS = Map.of(
-      "literature", List.of("William Shakespeare was an English playwright, poet and actor."),
-      "art", List.of(
-          "Leonardo di ser Piero da Vinci was an Italian polymath of the High Renaissance who was active as a "
-              + "painter, draughtsman, engineer, scientist, theorist, sculptor, and architect."),
-      "film", List.of(
-          "Sir Charles Spencer Chaplin was an English comic actor, filmmaker, and composer who rose to fame in the "
-              + "era of silent film."),
-      "sport", List.of("Muhammad Ali was an American professional boxer and social activist."));
-
   public static void main(String[] args) {
     new SpringApplicationBuilder(DemoVectorSearch.class)
-        .web(NONE)
         // this model produces much better results than the default one
         .properties("spring.ai.openai.embedding.options.model=text-embedding-3-small")
         .run(args)
         .close();
   }
+
+  private static final Map<String, List<String>> DOCUMENTS = Map.of(
+          "literature", List.of("William Shakespeare was an English playwright, poet and actor."),
+          "art", List.of(
+                  "Leonardo di ser Piero da Vinci was an Italian polymath of the High Renaissance who was active as a "
+                          + "painter, draughtsman, engineer, scientist, theorist, sculptor, and architect."),
+          "film", List.of(
+                  "Sir Charles Spencer Chaplin was an English comic actor, filmmaker, and composer who rose to fame in the "
+                          + "era of silent film."),
+          "sport", List.of("Muhammad Ali was an American professional boxer and social activist."));
 
   @Bean
   CommandLineRunner run(EmbeddingModel embeddingModel) {

@@ -1,11 +1,9 @@
 package just.demo.openai;
 
-import static org.springframework.boot.WebApplicationType.NONE;
-
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -14,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 public class DemoPrompt {
 
   public static void main(String[] args) {
-    new SpringApplicationBuilder(DemoPrompt.class).web(NONE).run(args).close();
+    SpringApplication.run(DemoPrompt.class, args);
   }
 
   @Bean

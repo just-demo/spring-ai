@@ -3,7 +3,6 @@ package just.demo.openai;
 import static java.lang.System.currentTimeMillis;
 
 import static org.springframework.ai.openai.OpenAiAudioSpeechOptions.Voice.ALLOY;
-import static org.springframework.boot.WebApplicationType.NONE;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -13,8 +12,8 @@ import org.springframework.ai.audio.tts.TextToSpeechResponse;
 import org.springframework.ai.openai.OpenAiAudioSpeechModel;
 import org.springframework.ai.openai.OpenAiAudioSpeechOptions;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -23,7 +22,7 @@ import org.springframework.context.annotation.Configuration;
 public class DemoAudioGeneration {
 
   public static void main(String[] args) {
-    new SpringApplicationBuilder(DemoAudioGeneration.class).web(NONE).run(args).close();
+    SpringApplication.run(DemoAudioGeneration.class, args);
   }
 
   @Bean

@@ -2,8 +2,6 @@ package just.demo.mcp;
 
 import static java.nio.file.Files.createDirectories;
 
-import static org.springframework.boot.WebApplicationType.NONE;
-
 import java.io.IOException;
 import java.nio.file.Path;
 
@@ -22,7 +20,6 @@ public class DemoMcpSimpleWithJsonConfig {
   public static void main(String[] args) throws IOException {
     createDirectories(Path.of("data").resolve("sandbox"));
     new SpringApplicationBuilder(DemoMcpSimpleWithJsonConfig.class)
-        .web(NONE)
         .properties(
             "spring.ai.mcp.client.stdio.servers-configuration=classpath:mcp-servers.json",
             "spring.ai.mcp.client.request-timeout=60s")

@@ -1,7 +1,5 @@
 package just.demo.mcp;
 
-import static org.springframework.boot.WebApplicationType.NONE;
-
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.tool.ToolCallbackProvider;
 import org.springframework.boot.CommandLineRunner;
@@ -16,7 +14,6 @@ public class DemoMcpCustomClient {
 
   public static void main(String[] args) {
     new SpringApplicationBuilder(DemoMcpCustomClient.class)
-        .web(NONE)
         .properties(
             "spring.ai.mcp.client.streamable-http.connections.custom.url=http://localhost:8085",
             "spring.ai.mcp.client.request-timeout=60s")

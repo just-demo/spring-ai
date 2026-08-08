@@ -8,19 +8,17 @@ import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.openai.OpenAiChatModel;
 import org.springframework.ai.openai.OpenAiChatOptions;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import static org.springframework.boot.WebApplicationType.NONE;
 
 @Configuration
 @EnableAutoConfiguration
 public class DemoPromptEntity {
 
     public static void main(String[] args) {
-        new SpringApplicationBuilder(DemoPromptEntity.class).web(NONE).run(args).close();
+        SpringApplication.run(DemoPromptEntity.class, args);
     }
 
     @Bean

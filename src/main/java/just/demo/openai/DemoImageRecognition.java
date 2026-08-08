@@ -1,14 +1,13 @@
 package just.demo.openai;
 
-import static org.springframework.boot.WebApplicationType.NONE;
 import static org.springframework.util.MimeTypeUtils.IMAGE_JPEG;
 
 import java.nio.file.Path;
 
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.FileSystemResource;
@@ -20,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 public class DemoImageRecognition {
 
   public static void main(String[] args) {
-    new SpringApplicationBuilder(DemoImageRecognition.class).web(NONE).run(args).close();
+    SpringApplication.run(DemoImageRecognition.class, args);
   }
 
   @Bean

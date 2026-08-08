@@ -2,8 +2,6 @@ package just.demo.mcp;
 
 import static java.nio.file.Files.createDirectories;
 
-import static org.springframework.boot.WebApplicationType.NONE;
-
 import java.io.IOException;
 import java.nio.file.Path;
 
@@ -22,7 +20,6 @@ public class DemoMcpSimple {
   public static void main(String[] args) throws IOException {
     Path sandboxDir = createDirectories(Path.of("data").resolve("sandbox")).toAbsolutePath();
     new SpringApplicationBuilder(DemoMcpSimple.class)
-        .web(NONE)
         .properties(
             "spring.ai.mcp.client.stdio.connections.filesystem.command=npx",
             "spring.ai.mcp.client.stdio.connections.filesystem.args[0]=-y",

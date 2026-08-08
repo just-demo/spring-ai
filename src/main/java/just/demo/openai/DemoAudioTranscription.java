@@ -1,7 +1,5 @@
 package just.demo.openai;
 
-import static org.springframework.boot.WebApplicationType.NONE;
-
 import static com.openai.models.audio.AudioResponseFormat.TEXT;
 
 import java.nio.file.Path;
@@ -11,8 +9,8 @@ import org.springframework.ai.audio.transcription.AudioTranscriptionResponse;
 import org.springframework.ai.audio.transcription.TranscriptionModel;
 import org.springframework.ai.openai.OpenAiAudioTranscriptionOptions;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.FileSystemResource;
@@ -22,7 +20,7 @@ import org.springframework.core.io.FileSystemResource;
 public class DemoAudioTranscription {
 
   public static void main(String[] args) {
-    new SpringApplicationBuilder(DemoAudioTranscription.class).web(NONE).run(args).close();
+    SpringApplication.run(DemoAudioTranscription.class, args);
   }
 
   @Bean

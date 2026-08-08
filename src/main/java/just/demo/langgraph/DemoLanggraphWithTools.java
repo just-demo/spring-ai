@@ -4,7 +4,6 @@ import static org.bsc.langgraph4j.StateGraph.END;
 import static org.bsc.langgraph4j.StateGraph.START;
 import static org.bsc.langgraph4j.action.AsyncEdgeAction.edge_async;
 import static org.bsc.langgraph4j.action.AsyncNodeAction.node_async;
-import static org.springframework.boot.WebApplicationType.NONE;
 
 import java.util.List;
 import java.util.Map;
@@ -27,8 +26,8 @@ import org.springframework.ai.tool.ToolCallback;
 import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.ai.tool.annotation.ToolParam;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -37,7 +36,7 @@ import org.springframework.context.annotation.Configuration;
 public class DemoLanggraphWithTools {
 
   public static void main(String[] args) {
-    new SpringApplicationBuilder(DemoLanggraphWithTools.class).web(NONE).run(args).close();
+    SpringApplication.run(DemoLanggraphWithTools.class, args);
   }
 
   @SuppressWarnings("unused")

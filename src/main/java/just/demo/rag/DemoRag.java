@@ -1,7 +1,5 @@
 package just.demo.rag;
 
-import static org.springframework.boot.WebApplicationType.NONE;
-
 import java.io.File;
 import java.nio.file.Path;
 import java.util.List;
@@ -14,8 +12,8 @@ import org.springframework.ai.embedding.EmbeddingModel;
 import org.springframework.ai.vectorstore.SimpleVectorStore;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -23,13 +21,13 @@ import org.springframework.context.annotation.Configuration;
 @EnableAutoConfiguration
 public class DemoRag {
 
-  private static final List<String> DOCUMENTS = List.of(
-      "JustDemo company is for educational purposes only.",
-      "It has only one contributor.");
-
   public static void main(String[] args) {
-    new SpringApplicationBuilder(DemoRag.class).web(NONE).run(args).close();
+    SpringApplication.run(DemoRag.class, args);
   }
+
+  private static final List<String> DOCUMENTS = List.of(
+          "JustDemo company is for educational purposes only.",
+          "It has only one contributor.");
 
   @Bean
   CommandLineRunner run(ChatClient.Builder chatClientBuilder, EmbeddingModel embeddingModel) {

@@ -4,7 +4,6 @@ import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
 
 import static org.apache.commons.lang3.StringUtils.truncate;
-import static org.springframework.boot.WebApplicationType.NONE;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,8 +13,8 @@ import org.springframework.ai.embedding.EmbeddingModel;
 import org.springframework.ai.reader.jsoup.JsoupDocumentReader;
 import org.springframework.ai.transformer.splitter.TokenTextSplitter;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -23,15 +22,15 @@ import org.springframework.context.annotation.Configuration;
 @EnableAutoConfiguration
 public class DemoVectorVisualize {
 
-  private static final List<String> DOCUMENTS = List.of(
-      "https://en.wikipedia.org/wiki/William_Shakespeare",
-      "https://en.wikipedia.org/wiki/Leonardo_da_Vinci");
-
   public static void main(String[] args) {
     // Wikipedia rejects the default "Java/xx" User-Agent with 403, JsoupDocumentReader loads URLs via HttpURLConnection
     System.setProperty("http.agent", "Mozilla/5.0 (SpringAiDemo)");
-    new SpringApplicationBuilder(DemoVectorVisualize.class).web(NONE).run(args).close();
+    SpringApplication.run(DemoVectorVisualize.class, args);
   }
+
+  private static final List<String> DOCUMENTS = List.of(
+          "https://en.wikipedia.org/wiki/William_Shakespeare",
+          "https://en.wikipedia.org/wiki/Leonardo_da_Vinci");
 
   @Bean
   CommandLineRunner run(EmbeddingModel embeddingModel) {

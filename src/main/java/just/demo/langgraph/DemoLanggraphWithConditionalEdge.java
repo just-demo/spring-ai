@@ -7,7 +7,6 @@ import static org.bsc.langgraph4j.action.AsyncNodeAction.node_async;
 import static org.bsc.langgraph4j.prebuilt.MessagesState.SCHEMA;
 import static org.springframework.ai.chat.messages.MessageType.ASSISTANT;
 import static org.springframework.ai.chat.messages.MessageType.USER;
-import static org.springframework.boot.WebApplicationType.NONE;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -28,8 +27,8 @@ import org.springframework.ai.chat.messages.UserMessage;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -38,7 +37,7 @@ import org.springframework.context.annotation.Configuration;
 public class DemoLanggraphWithConditionalEdge {
 
   public static void main(String[] args) {
-    new SpringApplicationBuilder(DemoLanggraphWithConditionalEdge.class).web(NONE).run(args).close();
+    SpringApplication.run(DemoLanggraphWithConditionalEdge.class, args);
   }
 
   @Bean

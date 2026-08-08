@@ -9,15 +9,12 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.Arrays;
 
-import static org.springframework.boot.WebApplicationType.NONE;
-
 @Configuration
 @EnableAutoConfiguration
 public class DemoVectorEmbedding {
 
     public static void main(String[] args) {
         new SpringApplicationBuilder(DemoVectorEmbedding.class)
-                .web(NONE)
                 // this model produces much better results than the default one
                 .properties("spring.ai.openai.embedding.options.model=text-embedding-3-small")
                 .run(args)

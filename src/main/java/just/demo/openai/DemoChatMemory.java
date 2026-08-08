@@ -3,7 +3,6 @@ package just.demo.openai;
 import static java.util.UUID.randomUUID;
 
 import static org.springframework.ai.chat.memory.ChatMemory.CONVERSATION_ID;
-import static org.springframework.boot.WebApplicationType.NONE;
 
 import java.util.Scanner;
 
@@ -11,8 +10,8 @@ import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.memory.MessageWindowChatMemory;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -21,7 +20,7 @@ import org.springframework.context.annotation.Configuration;
 public class DemoChatMemory {
 
   public static void main(String[] args) {
-    new SpringApplicationBuilder(DemoChatMemory.class).web(NONE).run(args).close();
+    SpringApplication.run(DemoChatMemory.class, args);
   }
 
   @Bean

@@ -1,13 +1,11 @@
 package just.demo.openai;
 
-import static org.springframework.boot.WebApplicationType.NONE;
-
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.ai.tool.annotation.ToolParam;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -16,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
 public class DemoTool {
 
   public static void main(String[] args) {
-    new SpringApplicationBuilder(DemoTool.class).web(NONE).run(args).close();
+    SpringApplication.run(DemoTool.class, args);
   }
 
   @SuppressWarnings("unused")

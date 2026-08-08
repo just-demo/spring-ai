@@ -2,8 +2,6 @@ package just.demo.openai;
 
 import static java.lang.System.currentTimeMillis;
 
-import static org.springframework.boot.WebApplicationType.NONE;
-
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Base64;
@@ -13,8 +11,8 @@ import org.springframework.ai.image.ImagePrompt;
 import org.springframework.ai.image.ImageResponse;
 import org.springframework.ai.openai.OpenAiImageOptions;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -23,7 +21,7 @@ import org.springframework.context.annotation.Configuration;
 public class DemoImageGeneration {
 
   public static void main(String[] args) {
-    new SpringApplicationBuilder(DemoImageGeneration.class).web(NONE).run(args).close();
+    SpringApplication.run(DemoImageGeneration.class, args);
   }
 
   @Bean

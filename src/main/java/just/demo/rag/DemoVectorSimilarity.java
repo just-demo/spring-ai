@@ -2,8 +2,6 @@ package just.demo.rag;
 
 import static java.lang.Math.sqrt;
 
-import static org.springframework.boot.WebApplicationType.NONE;
-
 import org.springframework.ai.embedding.EmbeddingModel;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -17,7 +15,6 @@ public class DemoVectorSimilarity {
 
   public static void main(String[] args) {
     new SpringApplicationBuilder(DemoVectorSimilarity.class)
-        .web(NONE)
         // this model produces much better results than the default one
         .properties("spring.ai.openai.embedding.options.model=text-embedding-3-small")
         .run(args)
