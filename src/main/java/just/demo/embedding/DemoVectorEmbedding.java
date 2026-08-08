@@ -1,4 +1,4 @@
-package just.demo.rag;
+package just.demo.embedding;
 
 import org.springframework.ai.embedding.EmbeddingModel;
 import org.springframework.boot.CommandLineRunner;

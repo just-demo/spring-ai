@@ -1,4 +1,4 @@
-package just.demo.rag;
+package just.demo.embedding.rag;
 
 import java.io.File;
 import java.nio.file.Path;

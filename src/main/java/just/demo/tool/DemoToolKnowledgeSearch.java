@@ -1,5 +1,6 @@
-package just.demo.rag;
+package just.demo.tool;
 
+import just.demo.embedding.rag.DemoRag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.document.Document;

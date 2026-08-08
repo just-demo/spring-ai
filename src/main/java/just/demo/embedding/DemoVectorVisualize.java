@@ -1,4 +1,4 @@
-package just.demo.rag;
+package just.demo.embedding;
 
 import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;

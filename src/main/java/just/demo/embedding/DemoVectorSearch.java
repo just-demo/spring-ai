@@ -1,4 +1,4 @@
-package just.demo.rag;
+package just.demo.embedding;
 
 import java.util.List;
 import java.util.Map;

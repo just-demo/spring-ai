@@ -1,4 +1,4 @@
-package just.demo.rag;
+package just.demo.embedding;
 
 import static java.lang.Math.sqrt;
 

@@ -1,4 +1,4 @@
-package just.demo.rag;
+package just.demo.embedding;
 
 import com.openai.client.OpenAIClient;
 import com.openai.client.okhttp.OpenAIOkHttpClient;
