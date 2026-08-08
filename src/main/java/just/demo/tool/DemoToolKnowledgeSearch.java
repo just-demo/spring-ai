@@ -95,7 +95,7 @@ public class DemoToolKnowledgeSearch {
                     .stream()
                     .map(Document::getText)
                     .toList();
-            System.out.println("searchKnowledgeBase(\"" + query + "\") -> " + facts);
+            System.out.println("  searchKnowledgeBase(\"" + query + "\") -> " + facts);
             return String.join("\n", facts);
         }
     }
