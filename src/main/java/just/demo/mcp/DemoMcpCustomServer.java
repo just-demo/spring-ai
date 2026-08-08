@@ -5,16 +5,14 @@ import static java.nio.file.Files.writeString;
 import static java.nio.file.StandardOpenOption.APPEND;
 import static java.nio.file.StandardOpenOption.CREATE;
 
-import static org.springframework.boot.WebApplicationType.SERVLET;
-
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.file.Path;
 
 import org.springframework.ai.mcp.annotation.McpTool;
 import org.springframework.ai.mcp.annotation.McpToolParam;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -25,10 +23,9 @@ import lombok.RequiredArgsConstructor;
 public class DemoMcpCustomServer {
 
   public static void main(String[] args) {
-    new SpringApplicationBuilder(DemoMcpCustomServer.class)
-        .web(SERVLET)
-        .run(
+    SpringApplication.run(DemoMcpCustomServer.class,
             "--server.port=8085",
+            "--spring.main.web-application-type=servlet",
             "--spring.ai.mcp.server.enabled=true",
             "--spring.ai.mcp.server.protocol=STREAMABLE",
             "--spring.ai.mcp.server.name=custom_server",

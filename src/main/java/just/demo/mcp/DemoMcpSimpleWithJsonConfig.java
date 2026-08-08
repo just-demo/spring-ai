@@ -8,8 +8,8 @@ import java.nio.file.Path;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.tool.ToolCallbackProvider;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,12 +19,9 @@ public class DemoMcpSimpleWithJsonConfig {
 
   public static void main(String[] args) throws IOException {
     createDirectories(Path.of("data").resolve("sandbox"));
-    new SpringApplicationBuilder(DemoMcpSimpleWithJsonConfig.class)
-        .properties(
-            "spring.ai.mcp.client.stdio.servers-configuration=classpath:mcp-servers.json",
-            "spring.ai.mcp.client.request-timeout=60s")
-        .run(args)
-        .close();
+    SpringApplication.run(DemoMcpSimpleWithJsonConfig.class,
+            "--spring.ai.mcp.client.stdio.servers-configuration=classpath:mcp-servers.json",
+            "--spring.ai.mcp.client.request-timeout=60s").close();
   }
 
   @Bean
