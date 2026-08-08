@@ -42,6 +42,9 @@ public class DemoSemanticCache {
         // DefaultSemanticCache stores the cached response as "response"/"response_text" metadata and
         // reads it back on a cache hit; without declaring these fields Redis never returns them on
         // search, so get() silently falls through to a fresh LLM call even when a similar doc is found
+        // TODO: drop this .metadataFields(...) override once RedisVectorStoreProperties supports
+        //  configuring metadata fields, and just rely on the auto-configured RedisVectorStore bean.
+        //  https://github.com/spring-projects/spring-ai/issues/3690
         .metadataFields(RedisVectorStore.MetadataField.text("response"),
             RedisVectorStore.MetadataField.text("response_text"),
             RedisVectorStore.MetadataField.numeric("ttl"),
@@ -81,6 +84,9 @@ public class DemoSemanticCache {
    * with an empty EmbeddingOptions, which silently drops the configured embedding model and falls
    * back to OpenAI's API-side default - a different model than query-time embed(String) calls use.
    * Routing storage through embed(List of String) keeps storage/query embeddings on the same model.
+   * TODO: delete this wrapper (and the .metadataFields(...) workaround above) once vector stores
+   *  stop dropping the configured EmbeddingModel/options on the doAdd() batch-embed path.
+   *  https://github.com/spring-projects/spring-ai/issues/2104
    */
   private static EmbeddingModel consistentEmbeddingModel(EmbeddingModel embeddingModel) {
     return new EmbeddingModel() {
