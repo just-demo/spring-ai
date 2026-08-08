@@ -8,9 +8,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Base64;
 
+import org.springframework.ai.image.ImageModel;
 import org.springframework.ai.image.ImagePrompt;
 import org.springframework.ai.image.ImageResponse;
-import org.springframework.ai.openai.OpenAiImageModel;
 import org.springframework.ai.openai.OpenAiImageOptions;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -27,7 +27,7 @@ public class DemoImageGeneration {
   }
 
   @Bean
-  CommandLineRunner run(OpenAiImageModel imageModel) {
+  CommandLineRunner run(ImageModel imageModel) {
     return args -> {
       ImageResponse response = imageModel.call(new ImagePrompt(
           "Happy futuristic world",
