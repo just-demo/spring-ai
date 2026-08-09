@@ -10,7 +10,7 @@ import just.demo.mcp.remote.DemoMcpRemoteServer;
  * Lists the tools exposed by {@link DemoMcpRemoteServer} using the official MCP Java SDK's
  * streamable-http client, without any Spring AI MCP client.
  */
-public class DemoMcpCustomServerDescribe {
+public class DemoMcpServerDescribe {
 
   public static void main(String[] args) {
     HttpClientStreamableHttpTransport transport =
