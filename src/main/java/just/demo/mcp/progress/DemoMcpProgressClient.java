@@ -35,12 +35,12 @@ public class DemoMcpProgressClient {
     }
 
     @Bean
-    DemoProgressListener progressListener() {
-        return new DemoProgressListener();
+    DemoProgressHandler demoProgressHandler() {
+        return new DemoProgressHandler();
     }
 
     @SuppressWarnings("unused")
-    static class DemoProgressListener {
+    static class DemoProgressHandler {
 
         @McpProgress(clients = "demo")
         void onProgress(McpSchema.ProgressNotification notification) {
