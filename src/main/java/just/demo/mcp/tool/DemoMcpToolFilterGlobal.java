@@ -22,33 +22,18 @@ import static java.nio.file.Files.createDirectories;
  * client autoconfiguration and applied globally: it runs once per (server, tool)
  * pair discovered across every configured MCP connection, and any tool it rejects
  * never enters the {@link ToolCallbackProvider} handed to the ChatClient.
- *
- * <p>Connects to two MCP servers so filtering has something to do: the stdio
- * "filesystem" server (its MCP handshake name is "secure-filesystem-server" -
- * NOT "filesystem", which is only the connection key in mcp-servers.json) and the
- * streamable-HTTP custom server (handshake name "custom_server"). The filter below
- * blocks every tool from "custom_server" while leaving the filesystem server alone.
- *
- * <p><b>Prerequisite:</b> {@code DemoMcpCustomServer} must already be running on
- * port 8085 in a separate process before this class is run (same requirement as
- * {@code DemoMcpCustomClient}) - it is not started automatically.
  */
 @Configuration
 @EnableAutoConfiguration
-public class DemoMcpToolFilter {
+public class DemoMcpToolFilterGlobal {
 
     // This demo depends on just.demo.mcp.remote.DemoMcpCustomServer, which should be started first
     public static void main(String[] args) throws IOException {
         createDirectories(Path.of("data").resolve("sandbox"));
-        SpringApplication.run(DemoMcpToolFilter.class,
+        SpringApplication.run(DemoMcpToolFilterGlobal.class,
                 "--spring.ai.mcp.client.stdio.servers-configuration=classpath:mcp-servers.json",
                 "--spring.ai.mcp.client.streamable-http.connections.custom.url=http://localhost:8085",
                 "--spring.ai.mcp.client.request-timeout=60s").close();
-    }
-
-    @Bean
-    McpToolFilter mcpToolFilter() {
-        return (connectionInfo, tool) -> !"demo_server".equals(connectionInfo.initializeResult().serverInfo().name());
     }
 
     @Bean
@@ -69,5 +54,10 @@ public class DemoMcpToolFilter {
             System.out.println("Tools registered with ChatClient (after McpToolFilter): " + filteredNames);
             System.out.println("Blocked " + (rawCount - filteredNames.size()) + " of " + rawCount + " tools");
         };
+    }
+
+    @Bean
+    McpToolFilter mcpToolFilter() {
+        return (connectionInfo, tool) -> !"demo_server".equals(connectionInfo.initializeResult().serverInfo().name());
     }
 }
