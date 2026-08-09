@@ -13,13 +13,13 @@ import java.util.Arrays;
 @EnableAutoConfiguration
 public class DemoVectorEmbedding {
 
-    public static void main(String[] args) {
+    static void main(String[] args) {
         SpringApplication.run(DemoVectorEmbedding.class, args);
     }
 
     @Bean
     CommandLineRunner run(EmbeddingModel embeddingModel) {
-        return args -> {
+        return _ -> {
             float[] vector = embeddingModel.embed("William Shakespeare");
             System.out.println(vector.length);
             System.out.println(Arrays.toString(vector));

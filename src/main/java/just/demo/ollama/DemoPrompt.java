@@ -11,21 +11,21 @@ import org.springframework.context.annotation.Configuration;
 @EnableAutoConfiguration
 public class DemoPrompt {
 
-  public static void main(String[] args) {
-    SpringApplication.run(DemoPrompt.class,
-            "--spring.ai.model.chat=ollama",
-            "--spring.ai.ollama.chat.options.model=llama3.2");
-  }
+    static void main() {
+        SpringApplication.run(DemoPrompt.class,
+                "--spring.ai.model.chat=ollama",
+                "--spring.ai.ollama.chat.options.model=llama3.2");
+    }
 
-  @Bean
-  CommandLineRunner run(ChatClient.Builder chatClientBuilder) {
-    return args -> {
-      String answer = chatClientBuilder.build()
-          .prompt()
-          .user("Who are you?")
-          .call()
-          .content();
-      System.out.println(answer);
-    };
-  }
+    @Bean
+    CommandLineRunner run(ChatClient.Builder chatClientBuilder) {
+        return _ -> {
+            String answer = chatClientBuilder.build()
+                    .prompt()
+                    .user("Who are you?")
+                    .call()
+                    .content();
+            System.out.println(answer);
+        };
+    }
 }

@@ -18,15 +18,15 @@ import static java.util.Optional.ofNullable;
 @EnableAutoConfiguration
 public class DemoToolCurrentTime {
 
-    public static void main(String[] args) {
+    static void main(String[] args) {
         SpringApplication.run(DemoToolCurrentTime.class, args);
     }
 
     @Bean
     CommandLineRunner run(ChatClient.Builder chatClientBuilder) {
-        return args -> {
+        return _ -> {
             ChatClient chatClient = chatClientBuilder
-                    .defaultTools(new TimeTools())
+                    .defaultTools(new DemoTools())
                     .build();
 
             testQuestion(chatClient, "What time is it right now?");
@@ -45,8 +45,7 @@ public class DemoToolCurrentTime {
     }
 
     @SuppressWarnings("unused")
-    private static class TimeTools {
-
+    private static class DemoTools {
         @Tool(description = "Get the current date and time, optionally in a specific time zone")
         String getCurrentTime(@ToolParam(description = "IANA time zone id, e.g. 'Asia/Tokyo'. Omit for the system default time zone.", required = false) String timeZone) {
             ZoneId zoneId = ofNullable(timeZone)

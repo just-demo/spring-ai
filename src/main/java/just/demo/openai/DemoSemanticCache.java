@@ -22,7 +22,7 @@ import static java.lang.System.currentTimeMillis;
 @EnableAutoConfiguration
 public class DemoSemanticCache {
 
-    public static void main(String[] args) {
+    static void main(String[] args) {
         SpringApplication.run(DemoSemanticCache.class, args);
     }
 
@@ -41,7 +41,7 @@ public class DemoSemanticCache {
 
     @Bean
     CommandLineRunner run(ChatClient.Builder chatClientBuilder, VectorStore vectorStore, EmbeddingModel embeddingModel) {
-        return args -> {
+        return _ -> {
             SemanticCache semanticCache = DefaultSemanticCache.builder()
                     .vectorStore(vectorStore)
                     .embeddingModel(embeddingModel) // required by the builder, but unused once vectorStore is set explicitly

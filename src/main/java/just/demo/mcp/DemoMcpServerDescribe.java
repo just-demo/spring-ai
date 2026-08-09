@@ -12,17 +12,17 @@ import just.demo.mcp.remote.DemoMcpRemoteServer;
  */
 public class DemoMcpServerDescribe {
 
-  public static void main(String[] args) {
-    HttpClientStreamableHttpTransport transport =
-        HttpClientStreamableHttpTransport.builder("http://localhost:8085").build();
+    static void main() {
+        HttpClientStreamableHttpTransport transport =
+                HttpClientStreamableHttpTransport.builder("http://localhost:8085").build();
 
-    try (McpSyncClient client = McpClient.sync(transport).build()) {
-      client.initialize();
-      for (Tool tool : client.listTools().tools()) {
-        System.out.println("- " + tool.name());
-        System.out.println("    description: " + tool.description());
-        System.out.println("    inputSchema: " + tool.inputSchema());
-      }
+        try (McpSyncClient client = McpClient.sync(transport).build()) {
+            client.initialize();
+            for (Tool tool : client.listTools().tools()) {
+                System.out.println("- " + tool.name());
+                System.out.println("    description: " + tool.description());
+                System.out.println("    inputSchema: " + tool.inputSchema());
+            }
+        }
     }
-  }
 }

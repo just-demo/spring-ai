@@ -11,19 +11,19 @@ import org.springframework.context.annotation.Configuration;
 @EnableAutoConfiguration
 public class DemoPrompt {
 
-  public static void main(String[] args) {
-    SpringApplication.run(DemoPrompt.class, args);
-  }
+    static void main(String[] args) {
+        SpringApplication.run(DemoPrompt.class, args);
+    }
 
-  @Bean
-  CommandLineRunner run(ChatClient.Builder chatClientBuilder) {
-    return args -> {
-      String answer = chatClientBuilder.build()
-          .prompt()
-          .user("Who are you?")
-          .call()
-          .content();
-      System.out.println(answer);
-    };
-  }
+    @Bean
+    CommandLineRunner run(ChatClient.Builder chatClientBuilder) {
+        return _ -> {
+            String answer = chatClientBuilder.build()
+                    .prompt()
+                    .user("Who are you?")
+                    .call()
+                    .content();
+            System.out.println(answer);
+        };
+    }
 }

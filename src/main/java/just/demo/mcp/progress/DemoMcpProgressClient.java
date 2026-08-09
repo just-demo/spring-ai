@@ -16,7 +16,7 @@ import java.util.UUID;
 @EnableAutoConfiguration
 public class DemoMcpProgressClient {
 
-    public static void main(String[] args) {
+    static void main() {
         SpringApplication.run(DemoMcpProgressClient.class,
                 "--spring.ai.mcp.client.streamable-http.connections.demo.url=http://localhost:8085",
                 "--spring.ai.mcp.client.request-timeout=60s");
@@ -24,7 +24,7 @@ public class DemoMcpProgressClient {
 
     @Bean
     CommandLineRunner run(ChatClient.Builder chatClientBuilder, ToolCallbackProvider mcpToolCallbackProvider) {
-        return args -> {
+        return _ -> {
             String result = chatClientBuilder.build().prompt()
                     .user("Generate a report on 'quarterly sales'")
                     .tools(tools -> tools.callbacks(mcpToolCallbackProvider).context("progressToken", UUID.randomUUID().toString()))

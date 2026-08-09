@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 @EnableAutoConfiguration
 public class DemoMcpSamplingServer {
 
-    public static void main(String[] args) {
+    static void main() {
         SpringApplication.run(DemoMcpSamplingServer.class,
                 "--server.port=8085",
                 "--spring.main.web-application-type=servlet",

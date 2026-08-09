@@ -16,13 +16,13 @@ import org.springframework.context.annotation.Configuration;
 @EnableAutoConfiguration
 public class DemoCustomAdvisorPrompt {
 
-    public static void main(String[] args) {
+    static void main(String[] args) {
         SpringApplication.run(DemoCustomAdvisorPrompt.class, args);
     }
 
     @Bean
     CommandLineRunner run(ChatClient.Builder chatClientBuilder) {
-        return args -> {
+        return _ -> {
             String answer = chatClientBuilder.build()
                     .prompt()
                     .advisors(new DemoCustomAdvisor(1), new DemoCustomAdvisor(2))

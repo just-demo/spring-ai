@@ -12,22 +12,22 @@ import org.springframework.context.annotation.Configuration;
 @EnableAutoConfiguration
 public class DemoMcpRemoteClient {
 
-  public static void main(String[] args) {
-    SpringApplication.run(DemoMcpRemoteClient.class,
-                    "--spring.ai.mcp.client.streamable-http.connections.custom.url=http://localhost:8085",
-            "--spring.ai.mcp.client.request-timeout=60s");
-  }
+    static void main() {
+        SpringApplication.run(DemoMcpRemoteClient.class,
+                "--spring.ai.mcp.client.streamable-http.connections.custom.url=http://localhost:8085",
+                "--spring.ai.mcp.client.request-timeout=60s");
+    }
 
-  @Bean
-  CommandLineRunner run(ChatClient.Builder chatClientBuilder, ToolCallbackProvider mcpToolCallbackProvider) {
-    return args -> {
-      String result = chatClientBuilder.build().prompt()
-          .system("Respond to user. If the user message contains email write it to emails.txt")
-          .user("Here is my email test@test.com")
-          .tools(tools -> tools.callbacks(mcpToolCallbackProvider))
-          .call()
-          .content();
-      System.out.println(result);
-    };
-  }
+    @Bean
+    CommandLineRunner run(ChatClient.Builder chatClientBuilder, ToolCallbackProvider mcpToolCallbackProvider) {
+        return _ -> {
+            String result = chatClientBuilder.build().prompt()
+                    .system("Respond to user. If the user message contains email write it to emails.txt")
+                    .user("Here is my email test@test.com")
+                    .tools(tools -> tools.callbacks(mcpToolCallbackProvider))
+                    .call()
+                    .content();
+            System.out.println(result);
+        };
+    }
 }

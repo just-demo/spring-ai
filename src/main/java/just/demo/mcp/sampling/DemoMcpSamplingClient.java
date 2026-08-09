@@ -29,7 +29,7 @@ import static java.util.stream.Collectors.joining;
 @EnableAutoConfiguration
 public class DemoMcpSamplingClient {
 
-    public static void main(String[] args) {
+    static void main() {
         SpringApplication.run(DemoMcpSamplingClient.class,
                 "--spring.ai.mcp.client.streamable-http.connections.demo.url=http://localhost:8085",
                 "--spring.ai.mcp.client.request-timeout=60s");
@@ -37,7 +37,7 @@ public class DemoMcpSamplingClient {
 
     @Bean
     CommandLineRunner run(ChatClient.Builder chatClientBuilder, ToolCallbackProvider mcpToolCallbackProvider) {
-        return args -> {
+        return _ -> {
             String result = chatClientBuilder.build().prompt()
                     .user("Summarize these notes: 'Met with the team, discussed Q3 roadmap, "
                             + "agreed to prioritize the mobile app redesign, next check-in in two weeks.'")

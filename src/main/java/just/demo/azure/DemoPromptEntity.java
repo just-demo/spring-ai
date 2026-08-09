@@ -17,8 +17,24 @@ import org.springframework.context.annotation.Configuration;
 @EnableAutoConfiguration
 public class DemoPromptEntity {
 
-    public static void main(String[] args) {
+    static void main(String[] args) {
         SpringApplication.run(DemoPromptEntity.class, args);
+    }
+
+    @Bean
+    CommandLineRunner run(ChatClient.Builder chatClientBuilder) {
+        return _ -> {
+            ResponseEntity<ChatResponse, DemoEntity> response = chatClientBuilder.build()
+                    .prompt()
+                    .user("Who are you?")
+                    .call()
+                    .responseEntity(DemoEntity.class);
+
+            ChatResponseMetadata metadata = response.getResponse().getMetadata();
+            System.out.println("Model: " + metadata.getModel());
+            System.out.println("Usage: " + metadata.getUsage());
+            System.out.println("Entity: " + response.entity());
+        };
     }
 
     @Bean
@@ -35,23 +51,6 @@ public class DemoPromptEntity {
                 .build();
     }
 
-    @Bean
-    CommandLineRunner run(ChatClient.Builder chatClientBuilder) {
-        return args -> {
-            ResponseEntity<ChatResponse, DemoEntity> response = chatClientBuilder.build()
-                    .prompt()
-                    .user("Who are you?")
-                    .call()
-                    .responseEntity(DemoEntity.class);
-
-            ChatResponseMetadata metadata = response.getResponse().getMetadata();
-            System.out.println("Model: " + metadata.getModel());
-            System.out.println("Usage: " + metadata.getUsage());
-            System.out.println("Entity: " + response.entity());
-        };
-    }
-
     record DemoEntity(String name, String version, String description) {
-
     }
 }

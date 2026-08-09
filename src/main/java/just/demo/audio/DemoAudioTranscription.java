@@ -1,9 +1,5 @@
 package just.demo.audio;
 
-import static com.openai.models.audio.AudioResponseFormat.TEXT;
-
-import java.nio.file.Path;
-
 import org.springframework.ai.audio.transcription.AudioTranscriptionPrompt;
 import org.springframework.ai.audio.transcription.AudioTranscriptionResponse;
 import org.springframework.ai.audio.transcription.TranscriptionModel;
@@ -15,25 +11,29 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.FileSystemResource;
 
+import java.nio.file.Path;
+
+import static com.openai.models.audio.AudioResponseFormat.TEXT;
+
 @Configuration
 @EnableAutoConfiguration
 public class DemoAudioTranscription {
 
-  public static void main(String[] args) {
-    SpringApplication.run(DemoAudioTranscription.class, args);
-  }
+    static void main(String[] args) {
+        SpringApplication.run(DemoAudioTranscription.class, args);
+    }
 
-  @Bean
-  CommandLineRunner run(TranscriptionModel transcriptionModel) {
-    return args -> {
-      Path audioPath = Path.of("data").resolve("audio.mp3");
-      AudioTranscriptionResponse transcription = transcriptionModel.call(new AudioTranscriptionPrompt(
-          new FileSystemResource(audioPath),
-          OpenAiAudioTranscriptionOptions.builder()
-              .model("whisper-1")
-              .responseFormat(TEXT)
-              .build()));
-      System.out.println(transcription.getResult().getOutput());
-    };
-  }
+    @Bean
+    CommandLineRunner run(TranscriptionModel transcriptionModel) {
+        return _ -> {
+            Path audioPath = Path.of("data").resolve("audio.mp3");
+            AudioTranscriptionResponse transcription = transcriptionModel.call(new AudioTranscriptionPrompt(
+                    new FileSystemResource(audioPath),
+                    OpenAiAudioTranscriptionOptions.builder()
+                            .model("whisper-1")
+                            .responseFormat(TEXT)
+                            .build()));
+            System.out.println(transcription.getResult().getOutput());
+        };
+    }
 }

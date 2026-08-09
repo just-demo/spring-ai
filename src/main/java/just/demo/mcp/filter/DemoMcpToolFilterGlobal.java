@@ -1,4 +1,4 @@
-package just.demo.mcp.tool;
+package just.demo.mcp.filter;
 
 import io.modelcontextprotocol.client.McpSyncClient;
 import io.modelcontextprotocol.spec.McpSchema;
@@ -28,7 +28,7 @@ import static java.nio.file.Files.createDirectories;
 public class DemoMcpToolFilterGlobal {
 
     // This demo depends on just.demo.mcp.remote.DemoMcpCustomServer, which should be started first
-    public static void main(String[] args) throws IOException {
+    static void main() throws IOException {
         createDirectories(Path.of("data").resolve("sandbox"));
         SpringApplication.run(DemoMcpToolFilterGlobal.class,
                 "--spring.ai.mcp.client.stdio.servers-configuration=classpath:mcp-servers.json",
@@ -38,7 +38,7 @@ public class DemoMcpToolFilterGlobal {
 
     @Bean
     CommandLineRunner run(List<McpSyncClient> mcpSyncClients, ToolCallbackProvider mcpToolCallbackProvider) {
-        return args -> {
+        return _ -> {
             System.out.println("Raw tools per MCP server (before McpToolFilter):");
             int rawCount = 0;
             for (McpSyncClient client : mcpSyncClients) {
@@ -58,6 +58,6 @@ public class DemoMcpToolFilterGlobal {
 
     @Bean
     McpToolFilter mcpToolFilter() {
-        return (connectionInfo, tool) -> !"demo_server".equals(connectionInfo.initializeResult().serverInfo().name());
+        return (connectionInfo, _) -> !"demo_server".equals(connectionInfo.initializeResult().serverInfo().name());
     }
 }

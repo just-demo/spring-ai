@@ -17,7 +17,7 @@ import org.springframework.context.annotation.Configuration;
 @EnableAutoConfiguration
 public class DemoMcpLocalServer {
 
-    public static void main(String[] args) {
+    static void main() {
         SpringApplication.run(DemoMcpLocalServer.class,
                 "--spring.main.web-application-type=none",
                 // A stdio server must not write anything but MCP protocol frames to stdout, hence disabling the web server,

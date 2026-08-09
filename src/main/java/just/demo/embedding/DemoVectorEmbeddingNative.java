@@ -19,7 +19,7 @@ import static java.nio.file.Files.newBufferedReader;
 
 public class DemoVectorEmbeddingNative {
 
-    public static void main(String[] args) throws IOException {
+    static void main() throws IOException {
         OpenAIClient client = OpenAIOkHttpClient.builder()
                 .apiKey(loadApiKey())
                 .build();

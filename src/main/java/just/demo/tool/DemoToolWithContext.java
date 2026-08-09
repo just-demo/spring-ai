@@ -22,19 +22,19 @@ import java.util.Map;
 @EnableAutoConfiguration
 public class DemoToolWithContext {
 
+    static void main(String[] args) {
+        SpringApplication.run(DemoToolWithContext.class, args);
+    }
+
     private static final Map<String, List<String>> ORDERS_BY_USER = Map.of(
             "alice", List.of("Order #1001: Espresso Machine", "Order #1002: Coffee Beans 1kg"),
             "bob", List.of("Order #2001: Standing Desk"));
 
-    public static void main(String[] args) {
-        SpringApplication.run(DemoToolWithContext.class, args);
-    }
-
     @Bean
     CommandLineRunner run(ChatClient.Builder chatClientBuilder) {
-        return args -> {
+        return _ -> {
             ChatClient chatClient = chatClientBuilder
-                    .defaultTools(new OrderTools())
+                    .defaultTools(new DemoTools())
                     .build();
 
             testQuestion(chatClient, "alice", "What are my recent orders?");
@@ -54,7 +54,7 @@ public class DemoToolWithContext {
     }
 
     @SuppressWarnings("unused")
-    private static class OrderTools {
+    private static class DemoTools {
 
         @Tool(description = "Get the current user's recent orders")
         List<String> getMyOrders(ToolContext toolContext) {

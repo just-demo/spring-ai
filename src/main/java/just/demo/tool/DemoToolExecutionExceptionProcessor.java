@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
 @EnableAutoConfiguration
 public class DemoToolExecutionExceptionProcessor {
 
-    public static void main(String[] args) {
+    static void main(String[] args) {
         SpringApplication.run(DemoToolExecutionExceptionProcessor.class, args);
     }
 
@@ -26,7 +26,7 @@ public class DemoToolExecutionExceptionProcessor {
 
     @Bean
     CommandLineRunner run(ChatClient.Builder chatClientBuilder, DemoTools demoTools) {
-        return args -> {
+        return _ -> {
             ChatClient chatClient = chatClientBuilder.defaultTools(demoTools).build();
             try {
                 String answer = chatClient.prompt()
@@ -47,7 +47,6 @@ public class DemoToolExecutionExceptionProcessor {
 
     @SuppressWarnings("unused")
     static class DemoTools {
-
         @Tool(description = "Look up the account balance for the given account id")
         String getBalance(String accountId) {
             throw new IllegalStateException("Account " + accountId + " is locked");

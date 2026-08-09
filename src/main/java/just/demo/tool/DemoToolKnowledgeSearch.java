@@ -29,7 +29,7 @@ import java.util.List;
 @EnableAutoConfiguration
 public class DemoToolKnowledgeSearch {
 
-    public static void main(String[] args) {
+    static void main(String[] args) {
         SpringApplication.run(DemoToolKnowledgeSearch.class, args);
     }
 
@@ -39,9 +39,9 @@ public class DemoToolKnowledgeSearch {
 
     @Bean
     CommandLineRunner run(ChatClient.Builder chatClientBuilder, EmbeddingModel embeddingModel) {
-        return args -> {
+        return _ -> {
             VectorStore vectorStore = getOrCreateVectorStore(embeddingModel);
-            KnowledgeBaseTools tools = new KnowledgeBaseTools(vectorStore);
+            DemoTools tools = new DemoTools(vectorStore);
 
             ChatClient chatClient = chatClientBuilder
                     .defaultSystem("""
@@ -82,7 +82,7 @@ public class DemoToolKnowledgeSearch {
     }
 
     @RequiredArgsConstructor
-    private static class KnowledgeBaseTools {
+    private static class DemoTools {
         private final VectorStore vectorStore;
 
         @SuppressWarnings("unused")

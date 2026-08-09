@@ -19,7 +19,7 @@ import static io.modelcontextprotocol.spec.McpSchema.ElicitResult.Action.ACCEPT;
 @EnableAutoConfiguration
 public class DemoMcpElicitationServer {
 
-    public static void main(String[] args) {
+    static void main() {
         SpringApplication.run(DemoMcpElicitationServer.class,
                 "--server.port=8085",
                 "--spring.main.web-application-type=servlet",

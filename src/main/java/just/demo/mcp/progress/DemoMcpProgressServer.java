@@ -14,7 +14,7 @@ import java.util.stream.IntStream;
 @EnableAutoConfiguration
 public class DemoMcpProgressServer {
 
-    public static void main(String[] args) {
+    static void main() {
         SpringApplication.run(DemoMcpProgressServer.class,
                 "--server.port=8085",
                 "--spring.main.web-application-type=servlet",

@@ -16,13 +16,13 @@ import java.util.List;
 @EnableAutoConfiguration
 public class DemoRelevancyEvaluator {
 
-    public static void main(String[] args) {
+    static void main(String[] args) {
         SpringApplication.run(DemoRelevancyEvaluator.class, args);
     }
 
     @Bean
     CommandLineRunner run(ChatClient.Builder chatClientBuilder) {
-        return args -> {
+        return _ -> {
             ChatClient chatClient = chatClientBuilder.build();
             RelevancyEvaluator evaluator = RelevancyEvaluator.builder()
                     .chatClientBuilder(chatClientBuilder)

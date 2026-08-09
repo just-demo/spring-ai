@@ -25,7 +25,7 @@ import static java.util.regex.Pattern.CASE_INSENSITIVE;
 @EnableAutoConfiguration
 public class DemoRagPostProcessor {
 
-    public static void main(String[] args) {
+    static void main(String[] args) {
         SpringApplication.run(DemoRagPostProcessor.class, args);
     }
 
@@ -38,7 +38,7 @@ public class DemoRagPostProcessor {
 
     @Bean
     CommandLineRunner run(ChatClient.Builder chatClientBuilder, EmbeddingModel embeddingModel) {
-        return args -> {
+        return _ -> {
             VectorStore vectorStore = getOrCreateVectorStore(embeddingModel);
             VectorStoreDocumentRetriever documentRetriever = VectorStoreDocumentRetriever.builder()
                     .vectorStore(vectorStore)
@@ -47,12 +47,11 @@ public class DemoRagPostProcessor {
 
             // As an example, we mask emails found in retrieved documents as a post-processor,
             // after retrieval and before they reach the prompt.
-            DocumentPostProcessor emailMasker = (query, documents) -> documents.stream()
+            DocumentPostProcessor emailMasker = (_, documents) -> documents.stream()
                     .map(document -> document.mutate()
                             .text(maskEmails(document.getText()))
                             .build())
                     .toList();
-
 
             RetrievalAugmentationAdvisor retrievalAdvisor = RetrievalAugmentationAdvisor.builder()
                     .documentRetriever(documentRetriever)

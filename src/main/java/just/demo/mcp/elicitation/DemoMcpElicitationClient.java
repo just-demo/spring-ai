@@ -23,7 +23,7 @@ import static io.modelcontextprotocol.spec.McpSchema.ElicitResult.Action.ACCEPT;
 @EnableAutoConfiguration
 public class DemoMcpElicitationClient {
 
-    public static void main(String[] args) {
+    static void main() {
         SpringApplication.run(DemoMcpElicitationClient.class,
                 "--spring.ai.mcp.client.streamable-http.connections.demo.url=http://localhost:8085",
                 "--spring.ai.mcp.client.request-timeout=60s");
@@ -31,7 +31,7 @@ public class DemoMcpElicitationClient {
 
     @Bean
     CommandLineRunner run(ChatClient.Builder chatClientBuilder, ToolCallbackProvider mcpToolCallbackProvider) {
-        return args -> {
+        return _ -> {
             String result = chatClientBuilder.build().prompt()
                     .system("Include every detail from the tool result in your answer, including ticket number, priority and contact info.")
                     .user("Create a support ticket: the printer on the 3rd floor is out of toner")
@@ -49,7 +49,6 @@ public class DemoMcpElicitationClient {
 
     @SuppressWarnings("unused")
     static class DemoElicitationHandler {
-
         @McpElicitation(clients = "demo")
         McpSchema.ElicitResult handleElicitationRequest(McpSchema.ElicitRequest request) {
             System.out.println("[elicitation request] " + request.message());

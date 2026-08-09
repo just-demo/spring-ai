@@ -22,7 +22,7 @@ import java.util.List;
 @EnableAutoConfiguration
 public class DemoRagQueryTransformer {
 
-    public static void main(String[] args) {
+    static void main(String[] args) {
         SpringApplication.run(DemoRagQueryTransformer.class, args);
     }
 
@@ -32,7 +32,7 @@ public class DemoRagQueryTransformer {
 
     @Bean
     CommandLineRunner run(ChatClient.Builder chatClientBuilder, EmbeddingModel embeddingModel) {
-        return args -> {
+        return _ -> {
             VectorStore vectorStore = getOrCreateVectorStore(embeddingModel);
             RetrievalAugmentationAdvisor retrievalAdvisor = RetrievalAugmentationAdvisor.builder()
                     // As an example, we use query translation as a pre-processor before document retrieval.

@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
 @EnableAutoConfiguration
 public class DemoMcpLoggingClient {
 
-    public static void main(String[] args) {
+    static void main() {
         SpringApplication.run(DemoMcpLoggingClient.class,
                 "--spring.ai.mcp.client.streamable-http.connections.demo.url=http://localhost:8085",
                 "--spring.ai.mcp.client.request-timeout=60s");
@@ -22,7 +22,7 @@ public class DemoMcpLoggingClient {
 
     @Bean
     CommandLineRunner run(ChatClient.Builder chatClientBuilder, ToolCallbackProvider mcpToolCallbackProvider) {
-        return args -> {
+        return _ -> {
             String result = chatClientBuilder.build().prompt()
                     .user("Place an order for 'coffee beans'")
                     .tools(tools -> tools.callbacks(mcpToolCallbackProvider))

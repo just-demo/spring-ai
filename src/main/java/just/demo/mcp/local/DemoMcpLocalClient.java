@@ -23,7 +23,7 @@ import java.time.Duration;
 @EnableAutoConfiguration
 public class DemoMcpLocalClient {
 
-    public static void main(String[] args) {
+    static void main() {
         String javaBin = Path.of(System.getProperty("java.home"), "bin", "java").toString();
         String classpath = System.getProperty("java.class.path");
         SpringApplication.run(DemoMcpLocalClient.class,
@@ -36,7 +36,7 @@ public class DemoMcpLocalClient {
 
     @Bean
     CommandLineRunner run(ChatClient.Builder chatClientBuilder, ToolCallbackProvider mcpToolCallbackProvider) {
-        return args -> {
+        return _ -> {
             String result = chatClientBuilder.build().prompt()
                     .user("Reverse the text 'spring ai'")
                     .tools(tools -> tools.callbacks(mcpToolCallbackProvider))
@@ -48,6 +48,6 @@ public class DemoMcpLocalClient {
 
     @Bean
     McpClientCustomizer<McpClient.SyncSpec> mcpClientCustomizer() {
-        return (name, spec) -> spec.initializationTimeout(Duration.ofSeconds(60));
+        return (_, spec) -> spec.initializationTimeout(Duration.ofSeconds(60));
     }
 }

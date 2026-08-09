@@ -17,7 +17,7 @@ import java.util.List;
 @EnableAutoConfiguration
 public class DemoFactCheckingEvaluator {
 
-    public static void main(String[] args) {
+    static void main(String[] args) {
         SpringApplication.run(DemoFactCheckingEvaluator.class, args);
     }
 
@@ -25,7 +25,7 @@ public class DemoFactCheckingEvaluator {
 
     @Bean
     CommandLineRunner run(ChatClient.Builder chatClientBuilder) {
-        return args -> {
+        return _ -> {
             FactCheckingEvaluator evaluator = FactCheckingEvaluator.builder(chatClientBuilder).build();
 
             evaluate(evaluator, "JustDemo was founded in 2024.");
