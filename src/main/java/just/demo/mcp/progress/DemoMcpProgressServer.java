@@ -1,4 +1,4 @@
-package just.demo.mcp.logging;
+package just.demo.mcp.progress;
 
 import org.springframework.ai.mcp.annotation.McpTool;
 import org.springframework.ai.mcp.annotation.McpToolParam;
@@ -8,12 +8,14 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.stream.IntStream;
+
 @Configuration
 @EnableAutoConfiguration
-public class DemoMcpLoggingServer {
+public class DemoMcpProgressServer {
 
     public static void main(String[] args) {
-        SpringApplication.run(DemoMcpLoggingServer.class,
+        SpringApplication.run(DemoMcpProgressServer.class,
                 "--server.port=8085",
                 "--spring.main.web-application-type=servlet",
                 "--spring.ai.mcp.server.enabled=true",
@@ -31,13 +33,12 @@ public class DemoMcpLoggingServer {
     @SuppressWarnings("unused")
     static class DemoTools {
 
-        @McpTool(name = "place_order", description = "Place an order for the given item")
-        String placeOrder(@McpToolParam(description = "item name") String item, McpSyncRequestContext ctx) {
-            ctx.info("Validating item: " + item);
-            ctx.info("Checking inventory for: " + item);
-            ctx.warn("Inventory is low for: " + item);
-            ctx.info("Order placed for: " + item);
-            return "Order placed for " + item;
+        @McpTool(name = "generate_report", description = "Generate a report for the given topic")
+        String generateReport(@McpToolParam(description = "report topic") String topic, McpSyncRequestContext ctx) {
+            IntStream.of(20, 40, 60, 80, 100).forEach(percent ->
+                    // You could also sleep here to emulate processing delay
+                    ctx.progress(spec -> spec.percentage(percent).message("Generating report on " + topic)));
+            return "Report on " + topic + " is ready";
         }
     }
 }
