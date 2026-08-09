@@ -4,9 +4,10 @@ import io.modelcontextprotocol.client.McpClient;
 import io.modelcontextprotocol.client.McpSyncClient;
 import io.modelcontextprotocol.client.transport.HttpClientStreamableHttpTransport;
 import io.modelcontextprotocol.spec.McpSchema.Tool;
+import just.demo.mcp.remote.DemoMcpRemoteServer;
 
 /**
- * Lists the tools exposed by {@link DemoMcpCustomServer} using the official MCP Java SDK's
+ * Lists the tools exposed by {@link DemoMcpRemoteServer} using the official MCP Java SDK's
  * streamable-http client, without any Spring AI MCP client.
  */
 public class DemoMcpCustomServerDescribe {

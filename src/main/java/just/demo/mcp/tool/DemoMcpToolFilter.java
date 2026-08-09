@@ -37,7 +37,7 @@ import static java.nio.file.Files.createDirectories;
 @EnableAutoConfiguration
 public class DemoMcpToolFilter {
 
-    // This demo depends on just.demo.mcp.DemoMcpCustomServer, which should be started first
+    // This demo depends on just.demo.mcp.remote.DemoMcpCustomServer, which should be started first
     public static void main(String[] args) throws IOException {
         createDirectories(Path.of("data").resolve("sandbox"));
         SpringApplication.run(DemoMcpToolFilter.class,
@@ -48,7 +48,7 @@ public class DemoMcpToolFilter {
 
     @Bean
     McpToolFilter mcpToolFilter() {
-        return (connectionInfo, tool) -> !"custom_server".equals(connectionInfo.initializeResult().serverInfo().name());
+        return (connectionInfo, tool) -> !"demo_server".equals(connectionInfo.initializeResult().serverInfo().name());
     }
 
     @Bean

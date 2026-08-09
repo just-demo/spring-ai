@@ -1,4 +1,4 @@
-package just.demo.mcp;
+package just.demo.mcp.remote;
 
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.tool.ToolCallbackProvider;
@@ -10,10 +10,10 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @EnableAutoConfiguration
-public class DemoMcpCustomClient {
+public class DemoMcpRemoteClient {
 
   public static void main(String[] args) {
-    SpringApplication.run(DemoMcpCustomClient.class,
+    SpringApplication.run(DemoMcpRemoteClient.class,
                     "--spring.ai.mcp.client.streamable-http.connections.custom.url=http://localhost:8085",
             "--spring.ai.mcp.client.request-timeout=60s");
   }

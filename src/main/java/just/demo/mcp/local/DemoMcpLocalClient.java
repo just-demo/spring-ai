@@ -1,6 +1,7 @@
 package just.demo.mcp.local;
 
 import io.modelcontextprotocol.client.McpClient;
+import just.demo.mcp.remote.DemoMcpRemoteClient;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.mcp.customizer.McpClientCustomizer;
 import org.springframework.ai.tool.ToolCallbackProvider;
@@ -16,7 +17,7 @@ import java.time.Duration;
 /**
  * Spawns {@link DemoMcpLocalServer} as a stdio subprocess using the current JVM's own
  * classpath (server and client live in the same module, so this avoids needing a
- * pre-built/pre-started separate process, unlike {@link just.demo.mcp.DemoMcpCustomClient}).
+ * pre-built/pre-started separate process, unlike {@link DemoMcpRemoteClient}).
  */
 @Configuration
 @EnableAutoConfiguration

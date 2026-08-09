@@ -1,5 +1,6 @@
 package just.demo.mcp.local;
 
+import just.demo.mcp.remote.DemoMcpRemoteServer;
 import org.springframework.ai.mcp.annotation.McpTool;
 import org.springframework.ai.mcp.annotation.McpToolParam;
 import org.springframework.boot.SpringApplication;
@@ -10,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * An MCP server exposed over stdio ("local" transport: the server is spawned as a
  * subprocess and talks to the client over stdin/stdout), as opposed to streamable-HTTP
- * ("remote" transport, see {@link just.demo.mcp.DemoMcpCustomServer}).
+ * ("remote" transport, see {@link DemoMcpRemoteServer}).
  */
 @Configuration
 @EnableAutoConfiguration

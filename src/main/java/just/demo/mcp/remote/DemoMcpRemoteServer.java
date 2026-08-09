@@ -1,4 +1,4 @@
-package just.demo.mcp;
+package just.demo.mcp.remote;
 
 import static java.nio.file.Files.createDirectories;
 import static java.nio.file.Files.writeString;
@@ -20,15 +20,15 @@ import lombok.RequiredArgsConstructor;
 
 @Configuration
 @EnableAutoConfiguration
-public class DemoMcpCustomServer {
+public class DemoMcpRemoteServer {
 
   public static void main(String[] args) {
-    SpringApplication.run(DemoMcpCustomServer.class,
+    SpringApplication.run(DemoMcpRemoteServer.class,
             "--server.port=8085",
             "--spring.main.web-application-type=servlet",
             "--spring.ai.mcp.server.enabled=true",
-            "--spring.ai.mcp.server.protocol=STREAMABLE",
-            "--spring.ai.mcp.server.name=custom_server",
+            "--spring.ai.mcp.server.protocol=streamable",
+            "--spring.ai.mcp.server.name=demo_server",
             "--spring.ai.model.chat=none",
             "--spring.ai.model.embedding=none");
   }
